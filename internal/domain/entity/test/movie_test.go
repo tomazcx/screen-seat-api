@@ -13,11 +13,12 @@ func TestCreateMovie_Success(t *testing.T) {
 	testDescription := "testDescription"
 	testDuration := 90
 	testRating := "G"
+	poster := "image.jpeg"
 	categories := []string{"Action"}
 	startDate := time.Now()
 	endDate := startDate.AddDate(0, 2, 0)
 
-	movie, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	movie, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.Nil(t, err)
 	assert.NotNil(t, movie.ID)
 	assert.Equal(t, movie.Title, testTitle)
@@ -33,10 +34,11 @@ func TestCreateMovie_Invalid_Title(t *testing.T) {
 	testDuration := 90
 	testRating := "G"
 	categories := []string{"Action"}
+	poster := "image.jpeg"
 	startDate := time.Now()
 	endDate := startDate.AddDate(0, 2, 0)
 
-	_, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieTitleIsRequired)
 }
@@ -46,16 +48,17 @@ func TestCreateMovie_Invalid_Duration(t *testing.T) {
 	testDescription := "testDescription"
 	testDuration := 4
 	testRating := "G"
+	poster := "image.jpeg"
 	categories := []string{"Action"}
 	startDate := time.Now()
 	endDate := startDate.AddDate(0, 2, 0)
 
-	_, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidDuration)
 
 	testDuration = 301
-	_, err = entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err = entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidDuration)
 }
@@ -64,11 +67,12 @@ func TestCreateMovie_Invalid_Test_Rating(t *testing.T) {
 	testDescription := "testDescription"
 	testDuration := 90
 	testRating := "X"
+	poster := "image.jpeg"
 	categories := []string{"Action"}
 	startDate := time.Now()
 	endDate := startDate.AddDate(0, 2, 0)
 
-	_, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidRate)
 }
@@ -80,9 +84,10 @@ func TestCreateMovie_Invalid_Categories(t *testing.T) {
 	testRating := "G"
 	categories := []string{}
 	startDate := time.Now()
+	poster := "image.jpeg" 
 	endDate := startDate.AddDate(0, 2, 0)
 
-	_, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidCategories)
 }
@@ -91,17 +96,18 @@ func TestCreateMovie_Invalid_Date(t *testing.T) {
 	testTitle := "Test title"
 	testDescription := "testDescription"
 	testDuration := 90
+	poster := "image.jpeg" 
 	testRating := "G"
 	categories := []string{"Action"}
 	startDate := time.Now()
 	endDate := startDate
 
-	_, err := entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err := entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidDates)
 
 	endDate = startDate.AddDate(0, 0, 1)
-	_, err = entity.NewMovie(testTitle, testDescription, testDuration, testRating, categories, startDate, endDate)
+	_, err = entity.NewMovie(testTitle, testDescription, testDuration, poster, testRating, categories, startDate, endDate)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, entity.ErrMovieInvalidDates)
 
@@ -110,7 +116,7 @@ func TestCreateMovie_Invalid_Date(t *testing.T) {
 func TestIsMovieShowing(t *testing.T){
 	startDate := time.Now().AddDate(0, -2, 0)
 	endDate := startDate.AddDate(0, 0, 7)
-	movie, err := entity.NewMovie("Test", "", 90, "G", []string{"Action"}, startDate, endDate)
+	movie, err := entity.NewMovie("Test", "", 90, "poster", "G", []string{"Action"}, startDate, endDate)
 	assert.Nil(t, err)
 
 	result := movie.IsMovieShowing()
@@ -155,7 +161,7 @@ func TestMovieDurationHourString_Batch_Success(t *testing.T) {
 	endDate := startDate.AddDate(0, 2, 0)
 
 	for _, item := range batchValues {
-		movie, err := entity.NewMovie("Test", "", item.Value, "G", []string{"Action"}, startDate, endDate)
+		movie, err := entity.NewMovie("Test", "", item.Value, "image.jpeg", "G", []string{"Action"}, startDate, endDate) 
 		assert.Nil(t, err)
 
 		durationHourString, err := movie.DurationHourString()
@@ -167,7 +173,7 @@ func TestMovieDurationHourString_Batch_Success(t *testing.T) {
 func TestMovieDurationHourString_Fail(t *testing.T) {
 	startDate := time.Now()
 	endDate := startDate.AddDate(0, 2, 0)
-	movie, err := entity.NewMovie("Test", "", 90, "G", []string{"Action"}, startDate, endDate)
+	movie, err := entity.NewMovie("Test", "", 90, "image.jpeg", "G", []string{"Action"}, startDate, endDate)
 	assert.Nil(t, err)
 
 	movie.Duration = 0
