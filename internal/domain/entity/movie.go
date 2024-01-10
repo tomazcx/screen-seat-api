@@ -15,7 +15,7 @@ var (
 	ErrMovieInvalidRate       = errors.New("Invalid rate. Must be a valid MPA film rating.")
 	ErrMovieInvalidCategories = errors.New("Invalid category list. Must contain at least one category.")
 	ErrMovieInvalidDates      = errors.New("Invalid dates. End date must be at least two days later than the start date.")
-	ErrMovieSessionRequired   = errors.New("At one least subtitled or a dubbed movie session is required.")
+	ErrMovieSessionRequired   = errors.New("At least one subtitled or a dubbed movie session is required.")
 	ErrMovieInvalidSession    = errors.New("One of the defined movie sessions is not valid. All days should contain at least one movie session with hour between 1pm and 10h30pm and a room.")
 )
 
