@@ -93,7 +93,34 @@ func NewMovie(
 		Duration:    duration,
 		AgeRating:   rate,
 		Categories:  categories,
+		StartDate: startDate,
+		EndDate: endDate,
 	}, nil
+}
+
+func (m *Movie) Validate() error {
+	if len(m.Title) < 1 {
+		return ErrMovieTitleIsRequired
+	}
+
+	if m.Duration < 5 || m.Duration > 300 {
+		return ErrMovieInvalidDuration
+	}
+
+	if !validateRate(m.AgeRating) {
+		return ErrMovieInvalidRate
+	}
+
+	if len(m.Categories) == 0 {
+		return ErrMovieInvalidCategories
+	}
+
+	dateDiff := m.EndDate.Sub(m.StartDate)
+	if dateDiff < time.Hour*48 {
+		return ErrMovieInvalidDates
+	}
+
+	return nil
 }
 
 func validateRate(rate string) bool {
