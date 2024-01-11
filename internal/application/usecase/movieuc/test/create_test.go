@@ -49,7 +49,6 @@ func TestCreateMovieUseCase_Category_Not_Registered(t *testing.T){
 	movieRepo := &mocks.MovieRepositoryMock{}
 	categoryRepo := &mocks.CategoryRepositoryMock{}
 
-	movieRepo.On("Create", mock.Anything).Return((error)(nil))
 	categoryRepo.On("Exists", "Action").Return(false, (error)(nil))
 
 	useCase := movieuc.NewCreateMovieUseCase(movieRepo, categoryRepo)
@@ -68,4 +67,5 @@ func TestCreateMovieUseCase_Category_Not_Registered(t *testing.T){
 	
 	assert.NotNil(t, err)
 	assert.True(t, errors.Is(err, movieuc.ErrCreateMovieCategoryNotRegistered))
+	movieRepo.AssertNotCalled(t, "Create")
 }

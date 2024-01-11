@@ -9,6 +9,7 @@ type IMovieRepository interface {
 	FindAllExhbition() ([]entity.Movie, error)
 	FindMany(page int, limit int, sort string, title string, rate string, category string) ([]entity.Movie, error)
 	Create(*entity.Movie) error
+	UpdatePoster(id string, posterUrl string) error
 	Update(*entity.Movie) error
 	Delete(id string) error
 }

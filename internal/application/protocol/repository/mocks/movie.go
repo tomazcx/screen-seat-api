@@ -40,8 +40,13 @@ func (m *MovieRepositoryMock) Update(movie *entity.Movie) error {
 	return args.Error(0)
 }
 
+func (m *MovieRepositoryMock) UpdatePoster(id string, posterUrl string) error {
+	args := m.Called(id, posterUrl)
+	return args.Error(0)
+}
+
 func (m *MovieRepositoryMock) Delete(id string) error {
 	args := m.Called(id)
-	return args.Error(1)
+	return args.Error(0)
 }
 
