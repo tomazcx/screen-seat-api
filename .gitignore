@@ -1,2 +1,3 @@
-./internal/infra/database/sqlc/**
+internal/infra/database/sqlc/**
+!internal/infra/database/sqlc/.gitkeep
 .docker/postgres/volumes/**
