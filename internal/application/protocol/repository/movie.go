@@ -2,7 +2,6 @@ package repository
 
 import "github.com/tomazcx/screen-seat-api/internal/domain/entity"
 
-
 type IMovieRepository interface {
 	Exists(id string) (bool, error)
 	FindById(id string) (*entity.Movie, error)
