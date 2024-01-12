@@ -1,4 +1,4 @@
-# Screen Seat API
+
 
 A RESTful API made for Screen Seat, a system designed to search for available movies and purchase tickets to watch them.
 
@@ -41,23 +41,18 @@ make up
 
 ## USAGE
 
-To list all the available commands, run:
+To list all the available `make` commands, run:
 
 ```bash
 make help
 ```
 
-Which will display:
+## TESTING
+
+You can execute one of the two commands to run all the application tests:
 
 ```bash
-Usage: make <target>
-  help                       Prints available commands
-  test                       Run all application's tests
-  new-migration              Create new migration
-  migrate-up                 Run migrations up
-  migrate-down               Run migrations down 1
-  up                         Run the application containers and its dependencies
-  build                      Run and build the containers
-  down                       Stop and destroy the containers
-  down-rmi                   Stop and destroy the containers and images
+make test
+# or 
+go test ./...
 ```
