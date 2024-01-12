@@ -1,4 +1,4 @@
-
+# Screen Seat API
 
 A RESTful API made for Screen Seat, a system designed to search for available movies and purchase tickets to watch them.
 
