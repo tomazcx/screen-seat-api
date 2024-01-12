@@ -1,0 +1,2 @@
+./internal/infra/database/sqlc/**
+.docker/postgres/volumes/**

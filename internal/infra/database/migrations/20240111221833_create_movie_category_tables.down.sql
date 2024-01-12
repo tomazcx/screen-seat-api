@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS join_movie_category;
+DROP TABLE IF EXISTS movie;
+DROP TABLE IF EXISTS category;
