@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 
 	"github.com/google/uuid"
 	"github.com/tomazcx/screen-seat-api/config"
@@ -22,4 +23,6 @@ func main(){
 	}
 	defer db.Close()
 	uuid.EnableRandPool()
+
+	http.ListenAndServe(":8000", nil)
 }

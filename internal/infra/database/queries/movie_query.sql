@@ -2,7 +2,7 @@
 SELECT COUNT(1) FROM movie WHERE id = $1;
 
 -- name: JoinMovieCategory :exec
-INSERT INTO join_movie_category (movie_id, category_id) VALUES ($1, $2);
+INSERT INTO join_movie_category (movie_id, category_name) VALUES ($1, $2);
 
 -- name: FindMovieById :one
 SELECT

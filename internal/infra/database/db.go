@@ -17,7 +17,7 @@ func GetDbConnection() *sql.DB{
 
 func ConnectToDB(conf *config.Cfg) (*sql.DB, error) {
 	connStr := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", conf.DBHost, conf.DBUser, conf.DBPassword, conf.DBName)
-	dbConn, _ = sql.Open("mysql", connStr)
+	dbConn, _ = sql.Open("postgres", connStr)
 	err := dbConn.Ping()
 
 	if err != nil {

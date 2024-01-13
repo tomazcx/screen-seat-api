@@ -18,9 +18,8 @@ CREATE TABLE IF NOT EXISTS category (
 
 CREATE TABLE IF NOT EXISTS join_movie_category (
 	movie_id UUID,
-	category_id UUID,
-	CONSTRAINT pk_join_movie_category PRIMARY KEY(movie_id, category_id),
+	category_name VARCHAR(255),
+	CONSTRAINT pk_join_movie_category PRIMARY KEY(movie_id, category_name),
 	CONSTRAINT fk_movie_join_movie_category FOREIGN KEY(movie_id) REFERENCES movie(id) ON DELETE CASCADE,
-	CONSTRAINT fk_category_join_movie_category FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
+	CONSTRAINT fk_category_join_movie_category FOREIGN KEY(category_name) REFERENCES category(name) ON DELETE CASCADE
 );
-
